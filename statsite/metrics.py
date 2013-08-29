@@ -59,7 +59,7 @@ class Counter(Metric):
     def fold(cls, lst, now):
         accumulator = {}
         for item in lst: item._fold(accumulator)
-        return [("counts.%s" % key,value,now) for key,value in accumulator.iteritems()]
+        return [("user.%s" % key,value,now) for key,value in accumulator.iteritems()]
 
     def _fold(self, accum):
         accum.setdefault(self.key, 0)
@@ -156,7 +156,7 @@ class KeyValue(Metric):
         Takes a list of the metrics objects and emits lists of (key,value,timestamp)
         pairs. Adds the kv prefix to all the keys so as not to pollute the main namespace.
         """
-        return [("kv.%s" % o.key,o.value,o.flag if o.flag else now) for o in lst]
+        return [("user.%s" % o.key,o.value,o.flag if o.flag else now) for o in lst]
 
 
 METRIC_TYPES = {
